@@ -33,10 +33,10 @@ function DashboardShell() {
             title={widget.title}
             refreshInterval={widget.refreshInterval}
           >
-            {(refreshData) => (
+            {(registerRefreshFunction) => (
               <widget.component
                 widgetId={widget.id}
-                onRefetch={refreshData}
+                registerRefreshFunction={registerRefreshFunction}
               />
             )}
           </WidgetWrapper>

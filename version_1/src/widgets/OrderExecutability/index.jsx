@@ -3,7 +3,7 @@ import { fetchOrderExecutability } from './api';
 import { config } from './config';
 import styles from './styles.module.css';
 
-function OrderExecutability({ widgetId, onRefetch }) {
+function OrderExecutability({ widgetId, registerRefreshFunction }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -15,10 +15,12 @@ function OrderExecutability({ widgetId, onRefetch }) {
     setError(null);
     
     try {
+      console.log(`Выполняю запрос к API для виджета ${widgetId}...`);
       const result = await fetchOrderExecutability({
         widgetId,
         period: 'month'
       });
+      console.log(`Получены данные для виджета ${widgetId}:`, result);
       setData(result);
     } catch (error) {
       setError('Ошибка загрузки данных');
@@ -32,11 +34,12 @@ function OrderExecutability({ widgetId, onRefetch }) {
     loadData();
   }, [loadData]);
 
+  // Регистрируем функцию обновления в WidgetWrapper
   useEffect(() => {
-    if (onRefetch) {
-      onRefetch(loadData);
+    if (registerRefreshFunction) {
+      registerRefreshFunction(loadData);
     }
-  }, [onRefetch, loadData]);
+  }, [registerRefreshFunction, loadData]);
 
   if (loading || !data) {
     return (

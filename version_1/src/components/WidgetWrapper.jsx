@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { defaultRefreshInterval } from '../config/dashboardConfig';
 import styles from './WidgetWrapper.module.css';
 
@@ -14,12 +14,27 @@ function WidgetWrapper({ widgetId, title, children, refreshInterval }) {
     refreshInterval || defaultRefreshInterval
   );
   const [lastUpdated, setLastUpdated] = useState(null);
-  const [refreshKey, setRefreshKey] = useState(0);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const refreshFunctionRef = useRef(null);
 
-  const triggerRefresh = useCallback(() => {
-    setRefreshKey(prev => prev + 1);
-    setLastUpdated(new Date().toLocaleTimeString());
+  // Функция для регистрации метода обновления из дочернего компонента
+  const registerRefreshFunction = useCallback((refreshFn) => {
+    refreshFunctionRef.current = refreshFn;
   }, []);
+
+  const triggerRefresh = useCallback(async () => {
+    if (refreshFunctionRef.current && !isRefreshing) {
+      setIsRefreshing(true);
+      try {
+        await refreshFunctionRef.current();
+        setLastUpdated(new Date().toLocaleTimeString());
+      } catch (error) {
+        console.error('Ошибка обновления виджета:', error);
+      } finally {
+        setIsRefreshing(false);
+      }
+    }
+  }, [isRefreshing]);
 
   useEffect(() => {
     if (selectedInterval === null) return;
@@ -45,6 +60,11 @@ function WidgetWrapper({ widgetId, title, children, refreshInterval }) {
               Обновлено: {lastUpdated}
             </span>
           )}
+          {isRefreshing && (
+            <span className={styles.refreshing}>
+              Обновление...
+            </span>
+          )}
         </div>
         <div className={styles.controls}>
           <select
@@ -62,8 +82,9 @@ function WidgetWrapper({ widgetId, title, children, refreshInterval }) {
             ))}
           </select>
           <button
-            className={styles.refreshButton}
+            className={`${styles.refreshButton} ${isRefreshing ? styles.spinning : ''}`}
             onClick={triggerRefresh}
+            disabled={isRefreshing}
             title="Обновить сейчас"
           >
             ↻
@@ -71,7 +92,7 @@ function WidgetWrapper({ widgetId, title, children, refreshInterval }) {
         </div>
       </div>
       <div className={styles.content}>
-        {children(triggerRefresh, refreshKey)}
+        {children(registerRefreshFunction)}
       </div>
     </div>
   );
