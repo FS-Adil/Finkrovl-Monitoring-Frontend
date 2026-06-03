@@ -1,4 +1,13 @@
-// Пока пустой массив, будет наполняться по мере добавления виджетов
-export const defaultRefreshInterval = 3600000; // 1 час в мс
+import OrderExecutability from '../widgets/OrderExecutability';
 
-export const widgets = [];
+export const defaultRefreshInterval = 3600000;
+
+export const widgets = [
+  {
+    id: 'order-executability-1',
+    component: OrderExecutability,
+    gridArea: '1 / 1 / 3 / 2',
+    title: 'Исполняемость заказов (Основной склад)',
+    refreshInterval: 1800000 // 30 минут
+  }
+];
