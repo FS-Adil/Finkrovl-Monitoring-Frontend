@@ -1,47 +1,41 @@
-import { widgets } from '../config/dashboardConfig';
-import WidgetWrapper from './WidgetWrapper';
+import { sections } from '../config/sectionsConfig';
+import { getWidgetById } from '../config/dashboardConfig';
+import SectionPanel from './SectionPanel';
 import styles from './DashboardShell.module.css';
 
 function DashboardShell() {
-  if (widgets.length === 0) {
+  console.log('[DashboardShell] Рендер оболочки, разделов:', sections.length);
+
+  if (sections.length === 0) {
     return (
       <div className={styles.empty}>
-        <p>Нет доступных виджетов</p>
+        <p>Нет доступных разделов</p>
         <p className={styles.hint}>
-          Добавьте виджеты в конфигурацию dashboardConfig.js
+          Добавьте разделы в sectionsConfig.js и виджеты в dashboardConfig.js
         </p>
       </div>
     );
   }
 
   return (
-    <div 
-      className={styles.grid}
-      style={{
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-        gridAutoRows: 'minmax(250px, auto)'
-      }}
-    >
-      {widgets.map((widget) => (
-        <div
-          key={widget.id}
-          className={styles.cell}
-          style={{ gridArea: widget.gridArea }}
-        >
-          <WidgetWrapper
-            widgetId={widget.id}
-            title={widget.title}
-            refreshInterval={widget.refreshInterval}
-          >
-            {(registerRefreshFunction) => (
-              <widget.component
-                widgetId={widget.id}
-                registerRefreshFunction={registerRefreshFunction}
-              />
-            )}
-          </WidgetWrapper>
-        </div>
-      ))}
+    <div className={styles.container}>
+      {sections.map((section) => {
+        const sectionWidgets = section.widgetIds
+          .map(id => getWidgetById(id))
+          .filter(Boolean);
+
+        console.log(`[DashboardShell] Раздел "${section.title}": виджетов ${sectionWidgets.length}`);
+
+        return (
+          <SectionPanel
+            key={section.id}
+            sectionId={section.id}
+            title={section.title}
+            widgets={sectionWidgets}
+            endpoint={section.endpoint}  // ← НОВОЕ: передаём endpoint
+          />
+        );
+      })}
     </div>
   );
 }

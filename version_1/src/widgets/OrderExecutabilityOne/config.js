@@ -5,4 +5,4 @@ export const config = {
     processing: '#faad14'
   },
   defaultLimit: 10
-}
+};

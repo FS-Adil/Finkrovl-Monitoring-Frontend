@@ -1,0 +1,84 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background: #fafafa;
+  border-radius: 8px;
+  border: 1px solid #f0f0f0;
+  overflow: hidden;
+  min-height: 250px;
+  transition: box-shadow 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.header {
+  padding: 10px 16px;
+  background: white;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+}
+
+.content {
+  flex: 1;
+  padding: 16px;
+  overflow: auto;
+  min-height: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: #fafafa;
+  border-radius: 8px;
+  border: 1px solid #f0f0f0;
+  overflow: hidden;
+  min-height: 250px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* НОВЫЙ: Стиль карточки с тестовыми данными */
+.mockCard {
+  border-color: #ffe58f;
+  background: #fffdf5;
+}
+
+.header {
+  padding: 10px 16px;
+  background: white;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+}
+
+/* НОВЫЙ: Индикатор тестовых данных */
+.mockIndicator {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.content {
+  flex: 1;
+  padding: 16px;
+  overflow: auto;
+  min-height: 0;
+}

@@ -6,4 +6,4 @@ export const config = {
   },
   barHeight: 30,
   animationDuration: 300
-}
+};

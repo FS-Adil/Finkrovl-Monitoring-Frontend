@@ -1,59 +1,19 @@
-import { useState, useEffect, useCallback } from 'react';
-import { fetchSalesData } from './api';
+import { useState } from 'react';
 import { config } from './config';
 import styles from './styles.module.css';
 
-function SalesChart({ onRefetch }) {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+// ПЕРЕПИСАН: Виджет получает data от SectionPanel
+function SalesChart({ widgetId, data, loading, isMockData }) {
   const [hoveredBar, setHoveredBar] = useState(null);
   const [viewMode, setViewMode] = useState('revenue');
 
-  const loadData = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-    
-    try {
-      const result = await fetchSalesData({
-        period: 'year',
-        groupBy: 'month'
-      });
-      setData(result);
-    } catch (error) {
-      setError('Ошибка загрузки данных');
-      console.error('Error fetching sales data:', error);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    loadData();
-  }, [loadData]);
-
-  useEffect(() => {
-    if (onRefetch) {
-      onRefetch(loadData);
-    }
-  }, [onRefetch, loadData]);
+  console.log(`[SalesChart] Рендер виджета ${widgetId}, данные:`, data ? `${data.length} месяцев` : 'нет', 'тестовые:', isMockData);
 
   if (loading || !data) {
     return (
       <div className={styles.loading}>
         <div className={styles.spinner}></div>
-        <span>Загрузка данных...</span>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className={styles.error}>
-        <span>{error}</span>
-        <button onClick={loadData} className={styles.retryButton}>
-          Повторить
-        </button>
+        <span>Ожидание данных...</span>
       </div>
     );
   }
@@ -69,12 +29,7 @@ function SalesChart({ onRefetch }) {
 
   const formatValue = (value) => {
     if (viewMode === 'revenue') {
-      return new Intl.NumberFormat('ru-RU', {
-        style: 'currency',
-        currency: 'RUB',
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0
-      }).format(value);
+      return new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB', minimumFractionDigits: 0 }).format(value);
     }
     return value;
   };
@@ -94,22 +49,18 @@ function SalesChart({ onRefetch }) {
               key={mode.key}
               className={`${styles.viewButton} ${viewMode === mode.key ? styles.active : ''}`}
               onClick={() => setViewMode(mode.key)}
-              style={{
-                borderColor: viewMode === mode.key ? mode.color : 'transparent'
-              }}
+              style={{ borderColor: viewMode === mode.key ? mode.color : 'transparent' }}
             >
               {mode.label}
             </button>
           ))}
         </div>
       </div>
-      
+
       <div className={styles.chart}>
         {data.map((item, index) => (
           <div key={item.month} className={styles.barGroup}>
-            <div className={styles.barValue}>
-              {hoveredBar === index ? formatValue(item[viewMode]) : ''}
-            </div>
+            <div className={styles.barValue}>{hoveredBar === index ? formatValue(item[viewMode]) : ''}</div>
             <div
               className={styles.bar}
               style={{

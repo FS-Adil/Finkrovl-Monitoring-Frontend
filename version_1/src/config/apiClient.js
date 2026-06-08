@@ -1,18 +1,22 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: 'http://192.168.0.248:8081',
+  // Пустой baseURL означает, что запросы пойдут на тот же origin (localhost:5173)
+  // Vite proxy перехватит /api/* и перенаправит на http://localhost:8080
+  baseURL: '',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Интерцептор для обработки ошибок
 apiClient.interceptors.response.use(
-  (response) => response.data,
+  (response) => {
+    console.log('[API] Ответ получен:', response.config.url);
+    return response.data;
+  },
   (error) => {
-    console.error('API Error:', error.message);
+    console.warn('[API] Ошибка запроса:', error.config?.url, error.message);
     return Promise.reject(error);
   }
 );

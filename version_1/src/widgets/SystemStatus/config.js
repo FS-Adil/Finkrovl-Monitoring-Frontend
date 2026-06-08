@@ -5,4 +5,4 @@ export const config = {
     disk: { warning: 80, critical: 95 }
   },
   refreshInterval: 5000
-}
+};
