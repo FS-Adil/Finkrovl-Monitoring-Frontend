@@ -1,0 +1,13 @@
+.app {
+  min-height: 100vh;
+  background: #f0f2f5;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.title {
+  margin: 0 0 24px 0;
+  font-size: 28px;
+  color: #1a1a1a;
+  font-weight: 600;
+}
