@@ -1,0 +1,24 @@
+.container { display: flex; flex-direction: column; gap: 16px; }
+.metrics { display: flex; flex-direction: column; gap: 12px; }
+.metric { display: flex; flex-direction: column; gap: 4px; }
+.metricHeader { display: flex; justify-content: space-between; font-size: 12px; color: #666; }
+.metricValue { font-weight: 600; }
+.metricBar { height: 8px; background: #f0f0f0; border-radius: 4px; overflow: hidden; }
+.metricFill { height: 100%; border-radius: 4px; min-width: 2px; }
+.uptime { display: flex; justify-content: space-between; padding: 8px 12px; background: #fafafa; border-radius: 4px; font-size: 13px; }
+.uptimeLabel { color: #888; }
+.uptimeValue { color: #333; font-weight: 500; }
+.services { display: flex; flex-direction: column; gap: 8px; }
+.servicesTitle { margin: 0; font-size: 12px; color: #888; text-transform: uppercase; }
+.serviceItem { display: flex; justify-content: space-between; padding: 6px 8px; background: #fafafa; border-radius: 4px; font-size: 13px; }
+.serviceName { color: #555; }
+.statusIndicator { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.statusIndicator.online { background: #52c41a; box-shadow: 0 0 6px rgba(82, 196, 26, 0.4); }
+.statusIndicator.degraded { background: #faad14; box-shadow: 0 0 6px rgba(250, 173, 20, 0.4); }
+.statusIndicator.offline { background: #ff4d4f; box-shadow: 0 0 6px rgba(255, 77, 79, 0.4); }
+.statusText { font-size: 12px; color: #888; display: flex; align-items: center; gap: 6px; }
+.loading { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 12px; color: #999; }
+.spinner { width: 32px; height: 32px; border: 3px solid #f0f0f0; border-top: 3px solid #1890ff; border-radius: 50%; animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.error { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 12px; color: #ff4d4f; }
+.retryButton { padding: 6px 16px; background: #1890ff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; }
