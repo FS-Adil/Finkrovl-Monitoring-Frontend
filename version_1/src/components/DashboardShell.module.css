@@ -12,12 +12,12 @@
   align-items: center;
   justify-content: center;
   min-height: 400px;
-  color: #999;
+  color: rgb(153, 153, 153);
   font-size: 18px;
 }
 
 .hint {
   font-size: 14px;
-  color: #bbb;
+  color: rgb(187, 187, 187);
   margin-top: 8px;
 }
