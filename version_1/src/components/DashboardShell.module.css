@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -12,12 +12,15 @@
   align-items: center;
   justify-content: center;
   min-height: 400px;
-  color: rgb(153, 153, 153);
+  color: rgb(120, 120, 120);
   font-size: 18px;
+  background: rgb(255, 255, 255);
+  border-radius: 12px;
+  border: 2px dashed rgb(180, 180, 180);
 }
 
 .hint {
   font-size: 14px;
-  color: rgb(187, 187, 187);
+  color: rgb(150, 150, 150);
   margin-top: 8px;
 }

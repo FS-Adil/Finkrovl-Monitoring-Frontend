@@ -1,9 +1,10 @@
 .panel {
   background: rgb(255, 255, 255);
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   margin-bottom: 24px;
+  border: 1px solid rgb(220, 220, 220);
 }
 
 .header {
@@ -11,8 +12,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 16px 20px;
-  background: linear-gradient(135deg, rgb(250, 250, 250) 0%, rgb(240, 240, 240) 100%);
-  border-bottom: 1px solid rgb(232, 232, 232);
+  background: linear-gradient(135deg, rgb(245, 245, 245) 0%, rgb(230, 230, 230) 100%);
+  border-bottom: 2px solid rgb(200, 200, 200);
 }
 
 .headerLeft {
@@ -25,66 +26,70 @@
 .title {
   margin: 0;
   font-size: 18px;
-  font-weight: 600;
-  color: rgb(26, 26, 26);
+  font-weight: 700;
+  color: rgb(20, 20, 20);
 }
 
 .lastUpdated {
   font-size: 12px;
-  color: rgb(136, 136, 136);
+  color: rgb(100, 100, 100);
+  font-weight: 500;
 }
 
 .refreshing {
   font-size: 12px;
-  color: rgb(24, 144, 255);
+  color: rgb(0, 100, 200);
+  font-weight: 500;
   animation: pulse 1.5s ease-in-out infinite;
 }
 
 @keyframes pulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  50% { opacity: 0.4; }
 }
 
 .mockBadge {
   font-size: 12px;
-  color: rgb(250, 173, 20);
-  background: rgb(255, 251, 230);
-  padding: 2px 8px;
+  color: rgb(180, 120, 0);
+  background: rgb(255, 245, 200);
+  padding: 3px 10px;
   border-radius: 12px;
-  border: 1px solid rgb(255, 229, 143);
+  border: 1px solid rgb(200, 150, 0);
+  font-weight: 600;
   white-space: nowrap;
 }
 
 .refreshButton {
   padding: 8px 16px;
-  background: rgb(24, 144, 255);
+  background: rgb(0, 100, 200);
   color: rgb(255, 255, 255);
   border: none;
   border-radius: 6px;
   cursor: pointer;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   transition: all 0.2s;
   white-space: nowrap;
 }
 
 .refreshButton:hover:not(:disabled) {
-  background: rgb(64, 169, 255);
+  background: rgb(0, 70, 150);
 }
 
 .refreshButton:active:not(:disabled) {
-  background: rgb(9, 109, 217);
+  background: rgb(0, 50, 100);
   transform: scale(0.98);
 }
 
 .refreshButton:disabled {
-  background: rgb(217, 217, 217);
+  background: rgb(180, 180, 180);
   cursor: not-allowed;
+  color: rgb(100, 100, 100);
 }
 
 .emptyText {
   font-size: 13px;
-  color: rgb(187, 187, 187);
+  color: rgb(150, 150, 150);
 }
 
 .widgetsGrid {
@@ -92,6 +97,7 @@
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 16px;
   padding: 16px;
+  background: rgb(250, 250, 250);
 }
 
 .loadingContainer {
@@ -101,14 +107,15 @@
   justify-content: center;
   padding: 48px;
   gap: 16px;
-  color: rgb(153, 153, 153);
+  color: rgb(100, 100, 100);
+  font-weight: 500;
 }
 
 .spinner {
-  width: 32px;
-  height: 32px;
-  border: 3px solid rgb(240, 240, 240);
-  border-top: 3px solid rgb(24, 144, 255);
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgb(220, 220, 220);
+  border-top: 4px solid rgb(0, 100, 200);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }

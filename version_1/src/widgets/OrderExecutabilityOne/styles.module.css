@@ -27,41 +27,43 @@
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
   border: 2px solid transparent;
+  background: rgb(248, 248, 248);
 }
 
 .statCard:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .statCard.active {
-  border-color: rgb(24, 144, 255);
-  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+  border-color: rgb(0, 100, 200);
+  box-shadow: 0 4px 12px rgba(0, 100, 200, 0.4);
 }
 
 .statLabel {
   font-size: 12px;
-  color: rgb(102, 102, 102);
+  color: rgb(80, 80, 80);
   margin-bottom: 4px;
+  font-weight: 500;
 }
 
 .statValue {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 700;
   margin: 0;
 }
 
-/* Цвета через RGB */
+/* Тёмные, насыщенные цвета */
 .statValue.paid { 
-  color: rgb(82, 196, 26);  /* #52c41a */
+  color: rgb(0, 130, 0);  /* Тёмно-зелёный */
 }
 
 .statValue.unpaid { 
-  color: rgb(255, 77, 79);  /* #ff4d4f */
+  color: rgb(200, 0, 0);  /* Тёмно-красный */
 }
 
 .statValue.processing { 
-  color: rgb(250, 173, 20); /* #faad14 */
+  color: rgb(200, 140, 0); /* Тёмно-оранжевый */
 }
 
 .loading {
@@ -71,14 +73,14 @@
   justify-content: center;
   height: 100%;
   gap: 12px;
-  color: rgb(153, 153, 153);
+  color: rgb(100, 100, 100);
 }
 
 .spinner {
   width: 32px;
   height: 32px;
-  border: 3px solid rgb(240, 240, 240);
-  border-top: 3px solid rgb(24, 144, 255);
+  border: 3px solid rgb(220, 220, 220);
+  border-top: 3px solid rgb(0, 100, 200);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -94,17 +96,21 @@
   justify-content: center;
   height: 100%;
   gap: 12px;
-  color: rgb(255, 77, 79);
+  color: rgb(200, 0, 0);
 }
 
 .retryButton {
   padding: 6px 16px;
-  background: rgb(24, 144, 255);
+  background: rgb(0, 100, 200);
   color: rgb(255, 255, 255);
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 13px;
+}
+
+.retryButton:hover {
+  background: rgb(0, 80, 160);
 }
 
 .modal {
@@ -113,7 +119,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -140,21 +146,24 @@
 .modalTitle { 
   margin: 0; 
   font-size: 18px; 
-  color: rgb(26, 26, 26);
+  color: rgb(20, 20, 20);
+  font-weight: 600;
 }
 
 .closeButton {
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 28px;
   cursor: pointer;
-  color: rgb(153, 153, 153);
+  color: rgb(100, 100, 100);
   padding: 4px 8px;
   border-radius: 4px;
+  line-height: 1;
 }
 
 .closeButton:hover { 
   background: rgb(240, 240, 240); 
+  color: rgb(0, 0, 0);
 }
 
 .table { 
@@ -163,46 +172,47 @@
 }
 
 .table th {
-  background: rgb(250, 250, 250);
+  background: rgb(240, 240, 240);
   padding: 12px;
   text-align: left;
   font-weight: 600;
   font-size: 13px;
-  color: rgb(85, 85, 85);
-  border-bottom: 2px solid rgb(232, 232, 232);
+  color: rgb(50, 50, 50);
+  border-bottom: 2px solid rgb(200, 200, 200);
 }
 
 .table td {
   padding: 10px 12px;
-  border-bottom: 1px solid rgb(240, 240, 240);
+  border-bottom: 1px solid rgb(220, 220, 220);
   font-size: 13px;
+  color: rgb(40, 40, 40);
 }
 
 .table tbody tr:hover { 
-  background: rgb(250, 250, 250); 
+  background: rgb(245, 245, 245); 
 }
 
 .statusBadge {
-  padding: 2px 8px;
-  border-radius: 10px;
-  font-size: 11px;
-  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .statusBadge.paid { 
-  background: rgb(246, 255, 237); 
-  color: rgb(82, 196, 26); 
-  border: 1px solid rgb(183, 235, 143); 
+  background: rgb(220, 255, 220); 
+  color: rgb(0, 100, 0); 
+  border: 1px solid rgb(0, 150, 0); 
 }
 
 .statusBadge.unpaid { 
-  background: rgb(255, 242, 240); 
-  color: rgb(255, 77, 79); 
-  border: 1px solid rgb(255, 204, 199); 
+  background: rgb(255, 220, 220); 
+  color: rgb(180, 0, 0); 
+  border: 1px solid rgb(200, 0, 0); 
 }
 
 .statusBadge.processing { 
-  background: rgb(255, 251, 230); 
-  color: rgb(250, 173, 20); 
-  border: 1px solid rgb(255, 229, 143); 
+  background: rgb(255, 240, 200); 
+  color: rgb(180, 120, 0); 
+  border: 1px solid rgb(200, 150, 0); 
 }
