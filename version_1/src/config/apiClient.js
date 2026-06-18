@@ -4,7 +4,7 @@ const apiClient = axios.create({
   // Пустой baseURL означает, что запросы пойдут на тот же origin (localhost:5173)
   // Vite proxy перехватит /api/* и перенаправит на http://localhost:8080
   baseURL: '',
-  timeout: 10000,
+  timeout: 120000,
   headers: {
     'Content-Type': 'application/json',
   },
